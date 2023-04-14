@@ -9,6 +9,20 @@ import time
 link_produk = time_target=None
 sekarang = datetime.datetime.now()
 
+def banner():
+	print('\033[94m==========================================')
+	print('''\033[91m==========================================|
+| ______  ___  ______ _______   __    |   |
+| | ___ \/ _ \ | ___ \  _  \ \ / /    |   |
+| | |_/ / /_\ \| |_/ / | | |\ V /     |   |
+| |  __/|  _  ||  __/| | | | \ /      |   |
+| | |   | | | || |   \ \_/ / | |      |   |
+| \_|   \_| |_/\_|    \___/  \_/      |   |
+|                                     |   |
+|buatan sansboy by: Paste             |   |
+==========================================|''')
+	print('\033[94m==========================================')
+
 def InputData() :
     global link_produk,time_target,sekarang
     link_produk = input('(#) Link Produk Shopee : ')
@@ -20,6 +34,7 @@ def InputData() :
     detik = int(input('(#) Detik Beli : '))
     time_target=datetime.datetime(sekarang.year,sekarang.month,sekarang.day,jam,menit,detik)
 # Inisialisasi WebDriver dalam mode headless
+banner()
 InputData()
 options = Options()
 options.add_argument('--headless')  # Menambahkan argument --headless
