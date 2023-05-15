@@ -13,9 +13,24 @@ import time
 link_produk = time_target=None
 sekarang = datetime.datetime.now()
 
+def banner():
+        print('\033[94m==========================================')
+        print('''\033[91m==========================================|
+| ______  ___  ______ _______   __    |   |
+| | ___ \/ _ \ | ___ \  _  \ \ / /    |   |
+| | |_/ / /_\ \| |_/ / | | |\ V /     |   |
+| |  __/|  _  ||  __/| | | | \ /      |   |
+| | |   | | | || |   \ \_/ / | |      |   |
+| \_|   \_| |_/\_|    \___/  \_/      |   |
+|                                     |   |
+|buatan sansboy by: Paste             |   |
+==========================================|''')
+        print('\033[94m==========================================')
+banner()
+
 def InputData() :
     global link_produk,time_target,sekarang
-    link_produk = input('(#) Link Produk Shopee : ')
+    link_produk = input('(#) Link web : ')
     ### Jam keberapa
     jam = int(input('(#) Jam Beli : '))
     ### Menit keberapa
@@ -29,44 +44,27 @@ InputData()
 driver = webdriver.Chrome()
 
 # Membuka situs web
-driver.get("https://shopee.co.id/")
-
-# Mendapatkan cookie yang ada
-cookies = driver.get_cookies()
-
-# Menyimpan cookie dalam variabel dictionary
-cookies_dict = {}
-for cookie in cookies:
-    cookies_dict[cookie['name']] = cookie['value']
-
-# Menambahkan cookie manual
-new_cookie = {'name': '_gcl_au', 'value': '1.1.1434682209.1681248787', 'domain': '.shopee.co.id'}
-
-driver.add_cookie(new_cookie)
-
-driver.refresh()
-
-driver.get(link_produk)
+driver.get("https://www.google.com/")
 
 selisih = time_target-datetime.datetime.now()
 print('(#) Harap Menunggu... ')
 time.sleep(selisih.seconds)
-driver.refresh()
+driver.get(link_produk)
 print('(#) Browser Refresh... ')
 
 def click(driiver,element_css):
-    WebDriverWait(driver, 20).until(
+    WebDriverWait(driver, 10).until(
         ec.visibility_of_element_located((By.CSS_SELECTOR, element_css))
     )
-    WebDriverWait(driver, 20).until(
+    WebDriverWait(driver, 10).until(
         ec.element_to_be_clickable((By.CSS_SELECTOR, element_css))
     )
     driver.find_element_by_css_selector(element_css).click()
 
 
-click(driver, '#main > div > div:nth-child(3) > div:nth-child(1) > div.ndOSOO > div > div > div.product-briefing.flex.card.s9-a-0 > div.flex.flex-auto.RBf1cu > div > div.h-y3ij > div > div.flex.rY0UiC.j9be9C > div > div:nth-child(1) > div > button:nth-child(1)')
+click(driver, '.lp-button--label')
 
-click(driver,'button.btn--l:nth-child(2)')
-WebDriverWait(driver, 20).until(
-    ec.invisibility_of_element((By.CSS_SELECTOR, '.action-toast'))
-)
+#click(driver,'button.btn--l:nth-child(2)')
+#WebDriverWait(driver, 10).until(
+#    ec.invisibility_of_element((By.CSS_SELECTOR, '.action-toast'))
+
